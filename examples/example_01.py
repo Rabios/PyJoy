@@ -1,3 +1,7 @@
+# To install PyJoy:
+# 1- Copy pyjoy.py from build folder to folder Lib in Python installation folder
+# 2- Plus copy again to Python installation folder beside Python compiler binaries
+
 from pyjoy import *
 
 w = window(800, 600, "MYGAME", False)
