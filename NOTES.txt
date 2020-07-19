@@ -1,0 +1,10 @@
+PyJoy, Game programming library uses OpenGL and it's libs, Works in Python 3 and Python 2
+
+Development started at 17/July/2020
+
+Made with:
+PyOpenAL + PyOGG (Sound/Audio)
+PyOpenGL (Graphics)
+GLFW (Window, Input)
+PIL/Pillow (To load images)
+freetype-py (Font rendering)
