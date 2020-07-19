@@ -71,7 +71,7 @@ def draw_circle(mode, circle, color):
     glColor4ub(color.r, color.g, color.b, color.a)
     glVertex3f(circle.x, circle.y, circle.z)
     for angle in range(360):
-        glVertex3f(circle.x + math.sin(angle) * circle.r, y + math.cos(angle) * circle.r, circle.z)
+        glVertex3f(circle.x + sin(angle) * circle.r, circle.y + cos(angle) * circle.r, circle.z)
     glEnd()
         
 def draw_triangle(mode, triangle, color):

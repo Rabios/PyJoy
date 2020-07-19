@@ -2,6 +2,7 @@
 # Window manipulation part
 import glfw
 
+# Window
 glfw_initialized = False
 
 class window:
@@ -34,6 +35,10 @@ class window:
             glfw.set_window_monitor(self.window, glfw.get_primary_monitor(), self.x, self.y, self.width, self.height, self.refresh_rate)
         else:
             glfw.set_window_monitor(self.window, None, self.x, self.y, self.width, self.height, self.refresh_rate)
+
+        if glfw.get_key(self.window, glfw.KEY_ESCAPE):
+            glfw.terminate()
+            
         glfw.swap_buffers(self.window)
         glfw.poll_events()
 
