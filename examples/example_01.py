@@ -9,7 +9,7 @@ from pyjoy import *
 w = window(800, 600, "MYGAME", False)
 
 # Create rectangle class
-r = rect(0.0, 0.0, 100 / 1000, 100 / 1000)
+r = rect(0, 0, 100, 100)
 
 while not w.should_close():
     # Clear in black, Or define color
@@ -20,13 +20,13 @@ while not w.should_close():
 
     # If key down
     if key_down(w, glfw.KEY_W) or key_down(w, glfw.KEY_UP):
-        r.y += 1 / 1000
+        r.y += value(1)
     if key_down(w, glfw.KEY_S) or key_down(w, glfw.KEY_DOWN):
-        r.y -= 1 / 1000
+        r.y -= value(1)
     if key_down(w, glfw.KEY_A) or key_down(w, glfw.KEY_LEFT):
-        r.x -= 1 / 1000
+        r.x -= value(1)
     if key_down(w, glfw.KEY_D) or key_down(w, glfw.KEY_RIGHT):
-        r.x += 1 / 1000
+        r.x += value(1)
 
     # Render and update game window
     w.update()
