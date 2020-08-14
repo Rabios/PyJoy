@@ -20,7 +20,7 @@ from urllib.parse import urlparse
 from zipfile import ZipFile
 
 # Main info
-pyjoy_version = "v0.0.2"         # Version
+pyjoy_version = "v0.0.3"         # Version
 pyjoy_author = "Rabia Alhaffar"  # Author
 pyjoy_use_cli = False            # CLI is disabled by default for distributing in games
 
@@ -119,28 +119,28 @@ def set_fullscreen(w, f):
 # Math
 class vec2:
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
+        self.x = x / 1000
+        self.y = y / 1000
         
 class vec3:
     def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
         
 class vec4:
     def __init__(self, x, y, z, w):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.w = w
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.w = w / 1000
 
 class quatrenion:
     def __init__(self, a, x, y, z):
-        self.a = a
-        self.x = x
-        self.y = y
-        self.z = z
+        self.a = a / 1000
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
 
 class color:
     def __init__(self, r, g, b, a):
@@ -151,39 +151,39 @@ class color:
 
 class rect:
     def __init__(self, x, y, w, h):
-        self.x = x
-        self.y = y
+        self.x = x / 1000
+        self.y = y / 1000
         self.z = 0
-        self.w = w
-        self.h = h
+        self.w = w / 1000
+        self.h = h / 1000
 
 class circle:
     def __init__(self, x, y, r):
-        self.x = x
-        self.y = y
+        self.x = x / 1000
+        self.y = y / 1000
         self.z = 0
-        self.r = r
+        self.r = r / 1000
 
 class line:
     def __init__(self, x1, y1, x2, y2):
-        self.x1 = x1
-        self.y1 = x1
+        self.x1 = x1 / 1000
+        self.y1 = x1 / 1000
         self.z1 = 0
-        self.x2 = x2
-        self.y2 = y2
+        self.x2 = x2 / 1000
+        self.y2 = y2 / 1000
         self.z2 = 0
         self.w = 1
 
 class triangle:
     def __init__(self, x1, y1, x2, y2, x3, y3):
-        self.x1 = x1
-        self.y1 = y1
+        self.x1 = x1 / 1000
+        self.y1 = y1 / 1000
         self.z1 = 0
-        self.x2 = x2
-        self.y2 = y2
+        self.x2 = x2 / 1000
+        self.y2 = y2 / 1000
         self.z2 = 0
-        self.x3 = x3
-        self.y3 = y3
+        self.x3 = x3 / 1000
+        self.y3 = y3 / 1000
         self.z3 = 0
     
 class polygon:
@@ -192,42 +192,32 @@ class polygon:
 
 class cube:
     def __init__(self, x, y, z, s):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.s = s
-        self.w = s
-        self.h = s
-        self.l = s
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.s = s / 1000
+        self.w = s / 1000
+        self.h = s / 1000
+        self.l = s / 1000
 
 class cuboid:
     def __init__(self, x, y, z, w, h, l):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.w = w
-        self.h = h
-        self.l = l
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.w = w / 1000
+        self.h = h / 1000
+        self.l = l / 1000
         
 class sphere:
     def __init__(self, x, y, z, s):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.size = s
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.size = s / 1000
         self.slices = 100
         self.stacks = 100
 
-class line:
-    def __init__(self, x1, y1, x2, y2):
-        self.x1 = x1
-        self.y1 = y1
-        self.z1 = 0
-        self.x2 = x2
-        self.y2 = y2
-        self.z2 = 0
-        self.width = 1
-        
 def vec2add(v1, v2):
     return vec2(v1.x + v2.x, v1.y + v2.y)
 
@@ -254,6 +244,9 @@ def rad2deg(rad):
 
 def deg2rad(deg):
     return deg * 3.141592653589793 / 180
+
+def value(s):
+    return s / 1000
 
 # @see https://stackoverflow.com/questions/47896860/how-do-you-apply-textures-with-pyopengl
 def generate_cube_vertices(xloc, yloc, zloc, x, y, z):
@@ -531,7 +524,7 @@ def clear(color):
     
 def draw_rect(mode, rect, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_QUADS)
     if mode == "line":
@@ -545,7 +538,7 @@ def draw_rect(mode, rect, color):
 
 def draw_circle(mode, circle, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_TRIANGLE_FAN)
     if mode == "line":
@@ -558,7 +551,7 @@ def draw_circle(mode, circle, color):
         
 def draw_triangle(mode, triangle, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_TRIANGLES)
     if mode == "line":
@@ -572,7 +565,7 @@ def draw_triangle(mode, triangle, color):
 def draw_line(line, color):
     glPointSize(line.w)
     glLoadIdentity()
-    apply()
+    apply_transforms()
     glBegin(GL_LINES)
     glColor4ub(color.r, color.g, color.b, color.a)
     glVertex3f(line.x1, line.y1, line.z1)
@@ -581,7 +574,7 @@ def draw_line(line, color):
 
 def draw_polygon(mode, polygon, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_POLYGON)
     if mode == "line":
@@ -593,7 +586,7 @@ def draw_polygon(mode, polygon, color):
 
 def draw_text(mode, text, x, y, z, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     glColor4ub(color.r, color.g, color.b, color.a)
     if mode == "line":
         glRasterPos3i(x, y, z)
@@ -618,7 +611,7 @@ def draw_texture(src, x, y, w, h):
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
     glLoadIdentity()
     glPushMatrix()
-    apply()
+    apply_transforms()
     glBegin(GL_QUADS)
     glTexCoord2d(0, 0)
     glVertex3f(x, y, z)
@@ -643,7 +636,7 @@ def draw_cube(mode, cube, color):
         glutSolidCube(c.s)
     if mode == "line":
         glutWireCube(c.s)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -662,7 +655,7 @@ def draw_textured_cube(cube, size):
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_CLAMP)
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
     glLoadIdentity()
-    apply()
+    apply_transforms()
     for surface in cube_surfaces:
         n = 0
         glBegin(GL_QUADS)
@@ -697,7 +690,7 @@ def draw_sphere(mode, sphere, color):
         glutSolidSphere(s.size, s.slices, s.stacks)
     if mode == "line":
         glutWireSphere(s.size, s.slices, s.stacks)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -710,7 +703,7 @@ def draw_cone(mode, pos, radius, height, slices, stacks, color):
         glutSolidCone(radius, height, slices, stacks)
     if mode == "line":
         glutWireCone(radius, height, slices, stacks)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
     
@@ -723,7 +716,7 @@ def draw_torus(mode, pos, inner_radius, outer_radius, sides, rings, color):
         glutSolidTorus(inner_radius, outer_radius, sides, rings)
     if mode == "line":
         glutWireTorus(inner_radius, outer_radius, sides, rings)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -736,7 +729,7 @@ def draw_icosahedron(mode, pos, color):
         glutSolidIcosahedron()
     if mode == "line":
         glutWireIcosahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -749,7 +742,7 @@ def draw_dodecahedron(mode, pos, color):
         glutSolidDodecahedron()
     if mode == "line":
         glutWireDodecahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -762,7 +755,7 @@ def draw_octahedron(mode, pos, color):
         glutSolidOctahedron()
     if mode == "line":
         glutWireOctahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -775,7 +768,7 @@ def draw_octahedron(mode, pos, color):
         glutSolidOctahedron()
     if mode == "line":
         glutWireOctahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
     
@@ -786,25 +779,25 @@ def clear_rect(rectangle):
     glDisable(GL_SCISSOR_TEST)
 
 def translate(x, y, z):
-    current_translation.x = x
-    current_translation.y = y
-    current_translation.z = z
+    current_translation.x = x / 1000
+    current_translation.y = y / 1000
+    current_translation.z = z / 1000
     transform[0] = True
     
 def rotate(a, x, y, z):
     current_rotation.a = a
-    current_rotation.x = x
-    current_rotation.y = y
-    current_rotation.z = z
+    current_rotation.x = x / 1000
+    current_rotation.y = y / 1000
+    current_rotation.z = z / 1000
     transform[1] = True
 
 def scale(x, y, z):
-    current_scale.x = x
-    current_scale.y = y
-    current_scale.z = z
+    current_scale.x = x / 1000
+    current_scale.y = y / 1000
+    current_scale.z = z / 1000
     transform[2] = True
 
-def apply():
+def apply_transforms():
     if transform[0]:
         glTranslate(current_translation.x, current_translation.y, current_translation.z)
         transform[0] = False
