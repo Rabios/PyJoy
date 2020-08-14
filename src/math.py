@@ -18,7 +18,7 @@ class vec4:
         self.z = z / 1000
         self.w = w / 1000
 
-class quatrenion:
+class quaternion:
     def __init__(self, a, x, y, z):
         self.a = a / 1000
         self.x = x / 1000
