@@ -10,7 +10,6 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from PIL import Image
 from math import *
-from freetype import *
 from openal import *
 from openal.al import *
 from openal.alc import *
@@ -21,9 +20,9 @@ from urllib.parse import urlparse
 from zipfile import ZipFile
 
 # Main info
-pyjoy_version = "v0.0.2"   # Version
-author = "Rabia Alhaffar"  # Author
-use_cli = False            # CLI is disabled by default for distributing in games
+pyjoy_version = "v0.0.2"         # Version
+pyjoy_author = "Rabia Alhaffar"  # Author
+pyjoy_use_cli = False            # CLI is disabled by default for distributing in games
 
 # Compatibility with Python 2
 def xrange(x):
@@ -41,7 +40,7 @@ pyjoy_packages = [
     "freetype-py"
 ]
 
-if use_cli:
+if pyjoy_use_cli:
     # Check arguments,If not find folder called "game" and run main.py
     if len(sys.argv) > 1:
         if "-v" in sys.argv or "--version" in sys.argv:
