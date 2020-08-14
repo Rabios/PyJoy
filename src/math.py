@@ -2,28 +2,28 @@
 # PyJoy math part,Contains classes used by various functions
 class vec2:
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
+        self.x = x / 1000
+        self.y = y / 1000
         
 class vec3:
     def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
         
 class vec4:
     def __init__(self, x, y, z, w):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.w = w
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.w = w / 1000
 
 class quatrenion:
     def __init__(self, a, x, y, z):
-        self.a = a
-        self.x = x
-        self.y = y
-        self.z = z
+        self.a = a / 1000
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
 
 class color:
     def __init__(self, r, g, b, a):
@@ -34,39 +34,39 @@ class color:
 
 class rect:
     def __init__(self, x, y, w, h):
-        self.x = x
-        self.y = y
+        self.x = x / 1000
+        self.y = y / 1000
         self.z = 0
-        self.w = w
-        self.h = h
+        self.w = w / 1000
+        self.h = h / 1000
 
 class circle:
     def __init__(self, x, y, r):
-        self.x = x
-        self.y = y
+        self.x = x / 1000
+        self.y = y / 1000
         self.z = 0
-        self.r = r
+        self.r = r / 1000
 
 class line:
     def __init__(self, x1, y1, x2, y2):
-        self.x1 = x1
-        self.y1 = x1
+        self.x1 = x1 / 1000
+        self.y1 = x1 / 1000
         self.z1 = 0
-        self.x2 = x2
-        self.y2 = y2
+        self.x2 = x2 / 1000
+        self.y2 = y2 / 1000
         self.z2 = 0
         self.w = 1
 
 class triangle:
     def __init__(self, x1, y1, x2, y2, x3, y3):
-        self.x1 = x1
-        self.y1 = y1
+        self.x1 = x1 / 1000
+        self.y1 = y1 / 1000
         self.z1 = 0
-        self.x2 = x2
-        self.y2 = y2
+        self.x2 = x2 / 1000
+        self.y2 = y2 / 1000
         self.z2 = 0
-        self.x3 = x3
-        self.y3 = y3
+        self.x3 = x3 / 1000
+        self.y3 = y3 / 1000
         self.z3 = 0
     
 class polygon:
@@ -75,42 +75,32 @@ class polygon:
 
 class cube:
     def __init__(self, x, y, z, s):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.s = s
-        self.w = s
-        self.h = s
-        self.l = s
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.s = s / 1000
+        self.w = s / 1000
+        self.h = s / 1000
+        self.l = s / 1000
 
 class cuboid:
     def __init__(self, x, y, z, w, h, l):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.w = w
-        self.h = h
-        self.l = l
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.w = w / 1000
+        self.h = h / 1000
+        self.l = l / 1000
         
 class sphere:
     def __init__(self, x, y, z, s):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.size = s
+        self.x = x / 1000
+        self.y = y / 1000
+        self.z = z / 1000
+        self.size = s / 1000
         self.slices = 100
         self.stacks = 100
 
-class line:
-    def __init__(self, x1, y1, x2, y2):
-        self.x1 = x1
-        self.y1 = y1
-        self.z1 = 0
-        self.x2 = x2
-        self.y2 = y2
-        self.z2 = 0
-        self.width = 1
-        
 def vec2add(v1, v2):
     return vec2(v1.x + v2.x, v1.y + v2.y)
 
@@ -137,6 +127,9 @@ def rad2deg(rad):
 
 def deg2rad(deg):
     return deg * 3.141592653589793 / 180
+
+def value(s):
+    return s / 1000
 
 # @see https://stackoverflow.com/questions/47896860/how-do-you-apply-textures-with-pyopengl
 def generate_cube_vertices(xloc, yloc, zloc, x, y, z):

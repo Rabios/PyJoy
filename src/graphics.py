@@ -49,7 +49,7 @@ def clear(color):
     
 def draw_rect(mode, rect, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_QUADS)
     if mode == "line":
@@ -63,7 +63,7 @@ def draw_rect(mode, rect, color):
 
 def draw_circle(mode, circle, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_TRIANGLE_FAN)
     if mode == "line":
@@ -76,7 +76,7 @@ def draw_circle(mode, circle, color):
         
 def draw_triangle(mode, triangle, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_TRIANGLES)
     if mode == "line":
@@ -90,7 +90,7 @@ def draw_triangle(mode, triangle, color):
 def draw_line(line, color):
     glPointSize(line.w)
     glLoadIdentity()
-    apply()
+    apply_transforms()
     glBegin(GL_LINES)
     glColor4ub(color.r, color.g, color.b, color.a)
     glVertex3f(line.x1, line.y1, line.z1)
@@ -99,7 +99,7 @@ def draw_line(line, color):
 
 def draw_polygon(mode, polygon, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     if mode == "fill":
         glBegin(GL_POLYGON)
     if mode == "line":
@@ -111,7 +111,7 @@ def draw_polygon(mode, polygon, color):
 
 def draw_text(mode, text, x, y, z, color):
     glLoadIdentity()
-    apply()
+    apply_transforms()
     glColor4ub(color.r, color.g, color.b, color.a)
     if mode == "line":
         glRasterPos3i(x, y, z)
@@ -136,7 +136,7 @@ def draw_texture(src, x, y, w, h):
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
     glLoadIdentity()
     glPushMatrix()
-    apply()
+    apply_transforms()
     glBegin(GL_QUADS)
     glTexCoord2d(0, 0)
     glVertex3f(x, y, z)
@@ -161,7 +161,7 @@ def draw_cube(mode, cube, color):
         glutSolidCube(c.s)
     if mode == "line":
         glutWireCube(c.s)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -180,7 +180,7 @@ def draw_textured_cube(cube, size):
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_CLAMP)
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
     glLoadIdentity()
-    apply()
+    apply_transforms()
     for surface in cube_surfaces:
         n = 0
         glBegin(GL_QUADS)
@@ -215,7 +215,7 @@ def draw_sphere(mode, sphere, color):
         glutSolidSphere(s.size, s.slices, s.stacks)
     if mode == "line":
         glutWireSphere(s.size, s.slices, s.stacks)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -228,7 +228,7 @@ def draw_cone(mode, pos, radius, height, slices, stacks, color):
         glutSolidCone(radius, height, slices, stacks)
     if mode == "line":
         glutWireCone(radius, height, slices, stacks)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
     
@@ -241,7 +241,7 @@ def draw_torus(mode, pos, inner_radius, outer_radius, sides, rings, color):
         glutSolidTorus(inner_radius, outer_radius, sides, rings)
     if mode == "line":
         glutWireTorus(inner_radius, outer_radius, sides, rings)
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -254,7 +254,7 @@ def draw_icosahedron(mode, pos, color):
         glutSolidIcosahedron()
     if mode == "line":
         glutWireIcosahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -267,7 +267,7 @@ def draw_dodecahedron(mode, pos, color):
         glutSolidDodecahedron()
     if mode == "line":
         glutWireDodecahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -280,7 +280,7 @@ def draw_octahedron(mode, pos, color):
         glutSolidOctahedron()
     if mode == "line":
         glutWireOctahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
 
@@ -293,7 +293,7 @@ def draw_octahedron(mode, pos, color):
         glutSolidOctahedron()
     if mode == "line":
         glutWireOctahedron()
-    apply()
+    apply_transforms()
     glPopMatrix()
     reset_transform()
     
@@ -304,25 +304,25 @@ def clear_rect(rectangle):
     glDisable(GL_SCISSOR_TEST)
 
 def translate(x, y, z):
-    current_translation.x = x
-    current_translation.y = y
-    current_translation.z = z
+    current_translation.x = x / 1000
+    current_translation.y = y / 1000
+    current_translation.z = z / 1000
     transform[0] = True
     
 def rotate(a, x, y, z):
     current_rotation.a = a
-    current_rotation.x = x
-    current_rotation.y = y
-    current_rotation.z = z
+    current_rotation.x = x / 1000
+    current_rotation.y = y / 1000
+    current_rotation.z = z / 1000
     transform[1] = True
 
 def scale(x, y, z):
-    current_scale.x = x
-    current_scale.y = y
-    current_scale.z = z
+    current_scale.x = x / 1000
+    current_scale.y = y / 1000
+    current_scale.z = z / 1000
     transform[2] = True
 
-def apply():
+def apply_transforms():
     if transform[0]:
         glTranslate(current_translation.x, current_translation.y, current_translation.z)
         transform[0] = False
