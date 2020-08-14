@@ -16,7 +16,7 @@ pyjoy_packages = [
     "freetype-py"
 ]
 
-if use_cli:
+if pyjoy_use_cli:
     # Check arguments,If not find folder called "game" and run main.py
     if len(sys.argv) > 1:
         if "-v" in sys.argv or "--version" in sys.argv:
