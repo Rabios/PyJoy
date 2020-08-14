@@ -10,9 +10,10 @@ w = window(800, 600, "MYGAME", False)
 
 # Create rectangle class
 r = rect(0.0, 0.0, 100 / 1000, 100 / 1000)
+
 while not w.should_close():
-    # Clear in black
-    clear(None)
+    # Clear in black, Or define color
+    clear(color(0, 0, 0, 255))
     
     # Draw
     draw_rect("fill", r, color(0, 0, 255, 255))
